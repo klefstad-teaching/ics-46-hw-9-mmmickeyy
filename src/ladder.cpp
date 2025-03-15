@@ -7,6 +7,7 @@
 #include <set>
 #include <unordered_map>
 #include <algorithm>
+#include "ladder.h"
 
 using namespace std;
 
