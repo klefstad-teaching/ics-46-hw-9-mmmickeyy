@@ -50,7 +50,7 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
 }
 
 void print_path(const vector<int>& path, int total) {
-    if (path.empty() || total == INF) {
+    if (path.empty()) {
         cout << "No path found" << endl;
         return;
     }
