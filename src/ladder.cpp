@@ -39,28 +39,26 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     queue<vector<string>> ladder_queue;
     ladder_queue.push({begin_word});
     set<string> visited;
-    
+
     while (!ladder_queue.empty()) {
         vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
         string last_word = ladder.back();
-        
-        if (visited.count(last_word)) continue;
-        visited.insert(last_word);
+
+        if (last_word == end_word) return ladder;
 
         for (const auto& word : word_list) {
             if (is_adjacent(last_word, word) && !visited.count(word)) {
                 vector<string> new_ladder = ladder;
                 new_ladder.push_back(word);
-                
-                if (word == end_word) return new_ladder;
-                
                 ladder_queue.push(new_ladder);
             }
         }
+        visited.insert(last_word);
     }
     return {};
 }
+
 
 void load_words(set<string>& word_list, const string& file_name) {
     ifstream file(file_name);
