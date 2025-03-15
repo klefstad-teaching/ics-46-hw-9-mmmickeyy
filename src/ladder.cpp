@@ -16,16 +16,15 @@ constexpr int INF = numeric_limits<int>::max();
 void error(string word1, string word2, string msg) {
     cerr << "Error: " << msg << " (" << word1 << " -> " << word2 << ")" << endl;
 }
-
 bool edit_distance_within(const string& str1, const string& str2, int d) {
-    int len1 = word1.size(), len2 = word2.size();
-    if (abs(len1 - len2) > 1) return false;
+    int len1 = str1.size(), len2 = str2.size();
+    if (abs(len1 - len2) > d) return false;
 
     int diff_count = 0, i = 0, j = 0;
     while (i < len1 && j < len2) {
-        if (word1[i] != word2[j]) {
+        if (str1[i] != str2[j]) {
             diff_count++;
-            if (diff_count > 1) return false;
+            if (diff_count > d) return false;
             if (len1 > len2) i++;
             else if (len2 > len1) j++;
             else { i++; j++; }
@@ -33,7 +32,7 @@ bool edit_distance_within(const string& str1, const string& str2, int d) {
             i++; j++;
         }
     }
-    return true;
+    return diff_count + abs(len1 - i - (len2 - j)) <= d;
 }
 
 bool is_adjacent(const string& word1, const string& word2) {
